@@ -1,0 +1,18 @@
+/* 
+ * Grolsch Premium Dutch Lager - Angular Component Styles
+ * ═══════════════════════════════════════════════════════════
+ * 
+ * All styles for this component are embedded directly in app.html
+ * within the <style> tag using Angular's component encapsulation.
+ * 
+ * This approach ensures:
+ * - Style encapsulation within the component
+ * - No CSS specificity conflicts
+ * - Proper scoping with :host selector
+ * 
+ * Design System:
+ * - Primary: Grolsch Green (#1a472a)
+ * - Accent: Grolsch Gold (#c9a227)
+ * - Typography: Playfair Display, Cormorant Garamond, Bebas Neue
+ * - Aesthetic: Premium luxury brewery with classic elegance
+ */
