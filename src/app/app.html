@@ -49,8 +49,12 @@
   }
 
   @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
   }
 
   @keyframes fadeInScale {
@@ -65,13 +69,23 @@
   }
 
   @keyframes goldShimmer {
-    0% { background-position: -200% center; }
-    100% { background-position: 200% center; }
+    0% {
+      background-position: -200% center;
+    }
+    100% {
+      background-position: 200% center;
+    }
   }
 
   @keyframes gentlePulse {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.8; transform: scale(1.02); }
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.8;
+      transform: scale(1.02);
+    }
   }
 
   @keyframes floatUp {
@@ -92,24 +106,23 @@
   }
 
   @keyframes rotateGlow {
-    0% { transform: translate(-50%, -50%) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) rotate(360deg); }
+    0% {
+      transform: translate(-50%, -50%) rotate(0deg);
+    }
+    100% {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
   }
 
   @keyframes hopFloat {
-    0%, 100% { transform: translateY(0) rotate(0deg); }
-    25% { transform: translateY(-15px) rotate(5deg); }
-    75% { transform: translateY(10px) rotate(-5deg); }
-  }
-
-  @keyframes borderGlow {
     0%, 100% {
-      box-shadow: 0 0 30px rgba(201, 162, 39, 0.1),
-                  inset 0 0 30px rgba(201, 162, 39, 0.02);
+      transform: translateY(0) rotate(0deg);
     }
-    50% {
-      box-shadow: 0 0 50px rgba(201, 162, 39, 0.2),
-                  inset 0 0 50px rgba(201, 162, 39, 0.05);
+    25% {
+      transform: translateY(-15px) rotate(5deg);
+    }
+    75% {
+      transform: translateY(10px) rotate(-5deg);
     }
   }
 
@@ -128,16 +141,36 @@
   }
 
   @keyframes grainAnimation {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-2%, -2%); }
-    20% { transform: translate(2%, 2%); }
-    30% { transform: translate(-1%, 1%); }
-    40% { transform: translate(1%, -1%); }
-    50% { transform: translate(-2%, 2%); }
-    60% { transform: translate(2%, -2%); }
-    70% { transform: translate(-1%, -1%); }
-    80% { transform: translate(1%, 1%); }
-    90% { transform: translate(-2%, -1%); }
+    0%, 100% {
+      transform: translate(0, 0);
+    }
+    10% {
+      transform: translate(-2%, -2%);
+    }
+    20% {
+      transform: translate(2%, 2%);
+    }
+    30% {
+      transform: translate(-1%, 1%);
+    }
+    40% {
+      transform: translate(1%, -1%);
+    }
+    50% {
+      transform: translate(-2%, 2%);
+    }
+    60% {
+      transform: translate(2%, -2%);
+    }
+    70% {
+      transform: translate(-1%, -1%);
+    }
+    80% {
+      transform: translate(1%, 1%);
+    }
+    90% {
+      transform: translate(-2%, -1%);
+    }
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -146,17 +179,16 @@
 
   main {
     min-height: 100vh;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(26, 71, 42, 0.3) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 80% 50%, rgba(201, 162, 39, 0.05) 0%, transparent 50%),
-      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(26, 71, 42, 0.2) 0%, transparent 50%),
-      linear-gradient(180deg,
-        #050a07 0%,
-        #0a1510 20%,
-        #0d1a14 40%,
-        #0a1510 70%,
-        #050a07 100%
-      );
+    background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(26, 71, 42, 0.3) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 80% 50%, rgba(201, 162, 39, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 60% 40% at 20% 80%, rgba(26, 71, 42, 0.2) 0%, transparent 50%),
+    linear-gradient(180deg,
+      #050a07 0%,
+      #0a1510 20%,
+      #0d1a14 40%,
+      #0a1510 70%,
+      #050a07 100%
+    );
     color: var(--text-primary);
     overflow-x: hidden;
     position: relative;
@@ -212,16 +244,75 @@
     filter: blur(1px);
   }
 
-  .hop-leaf:nth-child(1) { left: 5%; animation-duration: 25s; animation-delay: 0s; font-size: 1.2rem; }
-  .hop-leaf:nth-child(2) { left: 15%; animation-duration: 30s; animation-delay: 3s; font-size: 1.8rem; }
-  .hop-leaf:nth-child(3) { left: 25%; animation-duration: 28s; animation-delay: 7s; font-size: 1rem; }
-  .hop-leaf:nth-child(4) { left: 35%; animation-duration: 32s; animation-delay: 2s; font-size: 1.4rem; }
-  .hop-leaf:nth-child(5) { left: 45%; animation-duration: 26s; animation-delay: 5s; font-size: 1.6rem; }
-  .hop-leaf:nth-child(6) { left: 55%; animation-duration: 29s; animation-delay: 1s; font-size: 1.1rem; }
-  .hop-leaf:nth-child(7) { left: 65%; animation-duration: 31s; animation-delay: 6s; font-size: 1.5rem; }
-  .hop-leaf:nth-child(8) { left: 75%; animation-duration: 27s; animation-delay: 4s; font-size: 1.3rem; }
-  .hop-leaf:nth-child(9) { left: 85%; animation-duration: 33s; animation-delay: 8s; font-size: 1.7rem; }
-  .hop-leaf:nth-child(10) { left: 92%; animation-duration: 24s; animation-delay: 2.5s; font-size: 1rem; }
+  .hop-leaf:nth-child(1) {
+    left: 5%;
+    animation-duration: 25s;
+    animation-delay: 0s;
+    font-size: 1.2rem;
+  }
+
+  .hop-leaf:nth-child(2) {
+    left: 15%;
+    animation-duration: 30s;
+    animation-delay: 3s;
+    font-size: 1.8rem;
+  }
+
+  .hop-leaf:nth-child(3) {
+    left: 25%;
+    animation-duration: 28s;
+    animation-delay: 7s;
+    font-size: 1rem;
+  }
+
+  .hop-leaf:nth-child(4) {
+    left: 35%;
+    animation-duration: 32s;
+    animation-delay: 2s;
+    font-size: 1.4rem;
+  }
+
+  .hop-leaf:nth-child(5) {
+    left: 45%;
+    animation-duration: 26s;
+    animation-delay: 5s;
+    font-size: 1.6rem;
+  }
+
+  .hop-leaf:nth-child(6) {
+    left: 55%;
+    animation-duration: 29s;
+    animation-delay: 1s;
+    font-size: 1.1rem;
+  }
+
+  .hop-leaf:nth-child(7) {
+    left: 65%;
+    animation-duration: 31s;
+    animation-delay: 6s;
+    font-size: 1.5rem;
+  }
+
+  .hop-leaf:nth-child(8) {
+    left: 75%;
+    animation-duration: 27s;
+    animation-delay: 4s;
+    font-size: 1.3rem;
+  }
+
+  .hop-leaf:nth-child(9) {
+    left: 85%;
+    animation-duration: 33s;
+    animation-delay: 8s;
+    font-size: 1.7rem;
+  }
+
+  .hop-leaf:nth-child(10) {
+    left: 92%;
+    animation-duration: 24s;
+    animation-delay: 2.5s;
+    font-size: 1rem;
+  }
 
   /* ═══════════════════════════════════════════════════════════════════════════
      CONTENT WRAPPER
@@ -256,9 +347,8 @@
     transform: translate(-50%, -50%);
     width: 900px;
     height: 900px;
-    background:
-      radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 40%),
-      radial-gradient(circle, rgba(26, 71, 42, 0.15) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 40%),
+    radial-gradient(circle, rgba(26, 71, 42, 0.15) 0%, transparent 60%);
     pointer-events: none;
     animation: gentlePulse 8s ease-in-out infinite;
   }
@@ -275,15 +365,14 @@
     border: 1px solid rgba(201, 162, 39, 0.1);
     border-radius: 50%;
     animation: rotateGlow 60s linear infinite;
-    background:
-      conic-gradient(from 0deg,
-        transparent 0deg,
-        rgba(201, 162, 39, 0.1) 10deg,
-        transparent 20deg,
-        transparent 180deg,
-        rgba(201, 162, 39, 0.1) 190deg,
-        transparent 200deg
-      );
+    background: conic-gradient(from 0deg,
+    transparent 0deg,
+    rgba(201, 162, 39, 0.1) 10deg,
+    transparent 20deg,
+    transparent 180deg,
+    rgba(201, 162, 39, 0.1) 190deg,
+    transparent 200deg
+    );
     pointer-events: none;
   }
 
@@ -364,8 +453,7 @@
     animation: fadeInUp 1s ease-out 0.5s both;
     padding: 20px 48px;
     border: 1px solid rgba(201, 162, 39, 0.25);
-    background:
-      linear-gradient(135deg, rgba(26, 71, 42, 0.15) 0%, rgba(5, 10, 7, 0.4) 100%);
+    background: linear-gradient(135deg, rgba(26, 71, 42, 0.15) 0%, rgba(5, 10, 7, 0.4) 100%);
     backdrop-filter: blur(20px);
     position: relative;
   }
@@ -464,52 +552,29 @@
   }
 
   .heritage-card {
-    background:
-      linear-gradient(145deg, rgba(26, 71, 42, 0.12) 0%, rgba(5, 10, 7, 0.6) 100%);
-    border: 1px solid rgba(201, 162, 39, 0.15);
-    padding: 60px 48px;
+    background: linear-gradient(145deg, rgba(26, 71, 42, 0.15) 0%, rgba(5, 10, 7, 0.8) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    padding: 56px 48px;
     position: relative;
     overflow: hidden;
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    animation: fadeInUp 0.8s ease-out backwards;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
-
-  .heritage-card:nth-child(1) { animation-delay: 0.1s; }
-  .heritage-card:nth-child(2) { animation-delay: 0.2s; }
 
   .heritage-card::before {
     content: '';
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--grolsch-gold), transparent);
-    opacity: 0;
-    transition: opacity 0.6s ease;
-  }
-
-  .heritage-card::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--grolsch-gold), transparent);
-    opacity: 0;
-    transition: opacity 0.6s ease;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at top right, rgba(201, 162, 39, 0.08) 0%, transparent 60%);
+    pointer-events: none;
   }
 
   .heritage-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(201, 162, 39, 0.35);
-    animation: borderGlow 3s ease-in-out infinite;
-  }
-
-  .heritage-card:hover::before,
-  .heritage-card:hover::after {
-    opacity: 1;
+    transform: translateY(-6px);
+    border-color: rgba(201, 162, 39, 0.4);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
   }
 
   .card-ornament {
@@ -545,17 +610,48 @@
     background: var(--grolsch-gold);
   }
 
-  .card-art {
-    font-family: 'Courier New', monospace;
-    font-size: 0.75rem;
-    line-height: 1.6;
-    color: var(--grolsch-gold);
-    opacity: 0.7;
-    white-space: pre;
+  .card-ingredients {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     margin: 32px 0;
-    padding: 24px;
-    background: rgba(5, 10, 7, 0.5);
-    border-left: 2px solid rgba(201, 162, 39, 0.3);
+    padding: 28px 32px;
+    background: rgba(5, 10, 7, 0.6);
+    border-left: 3px solid var(--grolsch-gold);
+  }
+
+  .ingredient-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+  }
+
+  .ingredient-row span:first-child {
+    font-size: 1.3rem;
+    width: 28px;
+    text-align: center;
+  }
+
+  .ingredient-divider {
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, var(--grolsch-gold), transparent);
+    margin: 8px 0;
+  }
+
+  .card-badge {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 8px 20px;
+    background: rgba(201, 162, 39, 0.1);
+    border: 1px solid rgba(201, 162, 39, 0.3);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.9rem;
+    color: var(--grolsch-gold);
+    letter-spacing: 0.15em;
   }
 
   .card-description {
@@ -599,8 +695,13 @@
     color: rgba(201, 162, 39, 0.4);
   }
 
-  .section-label::before { left: 0; }
-  .section-label::after { right: 0; }
+  .section-label::before {
+    left: 0;
+  }
+
+  .section-label::after {
+    right: 0;
+  }
 
   .section-title {
     font-family: 'Playfair Display', Georgia, serif;
@@ -656,18 +757,28 @@
   .feature-card {
     text-align: center;
     padding: 48px 32px;
-    background:
-      linear-gradient(180deg, rgba(26, 71, 42, 0.08) 0%, transparent 100%);
+    background: linear-gradient(180deg, rgba(26, 71, 42, 0.08) 0%, transparent 100%);
     border: 1px solid rgba(201, 162, 39, 0.1);
     position: relative;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     animation: fadeInUp 0.6s ease-out backwards;
   }
 
-  .feature-card:nth-child(1) { animation-delay: 0.1s; }
-  .feature-card:nth-child(2) { animation-delay: 0.2s; }
-  .feature-card:nth-child(3) { animation-delay: 0.3s; }
-  .feature-card:nth-child(4) { animation-delay: 0.4s; }
+  .feature-card:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .feature-card:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .feature-card:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .feature-card:nth-child(4) {
+    animation-delay: 0.4s;
+  }
 
   .feature-card::before {
     content: '';
@@ -684,8 +795,7 @@
   .feature-card:hover {
     transform: translateY(-12px);
     border-color: rgba(201, 162, 39, 0.3);
-    background:
-      linear-gradient(180deg, rgba(26, 71, 42, 0.15) 0%, rgba(201, 162, 39, 0.02) 100%);
+    background: linear-gradient(180deg, rgba(26, 71, 42, 0.15) 0%, rgba(201, 162, 39, 0.02) 100%);
   }
 
   .feature-card:hover::before {
@@ -696,8 +806,7 @@
     width: 80px;
     height: 80px;
     margin: 0 auto 28px;
-    background:
-      linear-gradient(135deg, var(--grolsch-green) 0%, var(--grolsch-green-deep) 100%);
+    background: linear-gradient(135deg, var(--grolsch-green) 0%, var(--grolsch-green-deep) 100%);
     border: 1px solid rgba(201, 162, 39, 0.2);
     display: flex;
     align-items: center;
@@ -753,8 +862,7 @@
   }
 
   .stats-container {
-    background:
-      linear-gradient(135deg, rgba(26, 71, 42, 0.1) 0%, rgba(5, 10, 7, 0.5) 100%);
+    background: linear-gradient(135deg, rgba(26, 71, 42, 0.1) 0%, rgba(5, 10, 7, 0.5) 100%);
     border: 1px solid rgba(201, 162, 39, 0.15);
     padding: 80px 60px;
     position: relative;
@@ -813,10 +921,21 @@
     animation: fadeInUp 0.5s ease-out backwards;
   }
 
-  .stat-item:nth-child(1) { animation-delay: 0.1s; }
-  .stat-item:nth-child(2) { animation-delay: 0.2s; }
-  .stat-item:nth-child(3) { animation-delay: 0.3s; }
-  .stat-item:nth-child(4) { animation-delay: 0.4s; }
+  .stat-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+
+  .stat-item:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+
+  .stat-item:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  .stat-item:nth-child(4) {
+    animation-delay: 0.4s;
+  }
 
   .stat-item::after {
     content: '';
@@ -892,9 +1011,8 @@
     transform: translate(-50%, -50%);
     width: 800px;
     height: 800px;
-    background:
-      radial-gradient(circle, rgba(201, 162, 39, 0.06) 0%, transparent 50%),
-      radial-gradient(circle, rgba(26, 71, 42, 0.1) 0%, transparent 60%);
+    background: radial-gradient(circle, rgba(201, 162, 39, 0.06) 0%, transparent 50%),
+    radial-gradient(circle, rgba(26, 71, 42, 0.1) 0%, transparent 60%);
     pointer-events: none;
   }
 
@@ -928,8 +1046,7 @@
     align-items: center;
     gap: 16px;
     padding: 24px 64px;
-    background:
-      linear-gradient(135deg, var(--grolsch-gold) 0%, var(--grolsch-gold-light) 100%);
+    background: linear-gradient(135deg, var(--grolsch-gold) 0%, var(--grolsch-gold-light) 100%);
     color: var(--bg-dark);
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 1.1rem;
@@ -938,9 +1055,8 @@
     letter-spacing: 0.2em;
     text-transform: uppercase;
     transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow:
-      0 8px 40px rgba(201, 162, 39, 0.3),
-      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 40px rgba(201, 162, 39, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
     position: relative;
     overflow: hidden;
     border: none;
@@ -960,10 +1076,9 @@
 
   .cta-button:hover {
     transform: translateY(-4px) scale(1.02);
-    box-shadow:
-      0 16px 60px rgba(201, 162, 39, 0.4),
-      0 0 40px rgba(201, 162, 39, 0.15),
-      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    box-shadow: 0 16px 60px rgba(201, 162, 39, 0.4),
+    0 0 40px rgba(201, 162, 39, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   }
 
   .cta-button:hover::before {
@@ -978,8 +1093,7 @@
     padding: 120px 24px 80px;
     text-align: center;
     position: relative;
-    background:
-      linear-gradient(to top, rgba(5, 10, 7, 0.9) 0%, transparent 100%);
+    background: linear-gradient(to top, rgba(5, 10, 7, 0.9) 0%, transparent 100%);
   }
 
   footer::before {
@@ -1068,8 +1182,7 @@
     align-items: center;
     gap: 12px;
     padding: 14px 32px;
-    background:
-      linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(26, 71, 42, 0.08) 100%);
+    background: linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(26, 71, 42, 0.08) 100%);
     border: 1px solid rgba(201, 162, 39, 0.2);
     font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 0.85rem;
@@ -1156,7 +1269,7 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="logo-container">
-        <h1 class="brand-logo">Grolsch Premium Lager</h1>
+        <h1 class="brand-logo">Grolsch</h1>
         <p class="tagline">Premium Dutch Lager</p>
         <div class="established">
           <span>Established 1615</span>
@@ -1186,55 +1299,34 @@
         <article class="heritage-card">
           <span class="card-ornament">🍺</span>
           <h3 class="card-title">Brewing Heritage</h3>
-          <div class="card-art">
-     ╔════════════════════╗
-     ║    MASTER BREWED   ║
-     ║    SINCE  1615     ║
-     ╚════════════════════╝
-
-      Premium Barley
-           ✦
-       Noble Hops
-           ✦
-      Pure Spring Water
-           ✦
-       Time & Devotion
-           ═
-       Perfect Lager
-
-        ◆ 4.0% ABV ◆
+          <div class="card-ingredients">
+            <div class="ingredient-row"><span>🌾</span> Premium Barley</div>
+            <div class="ingredient-row"><span>🌿</span> Noble Hops</div>
+            <div class="ingredient-row"><span>💧</span> Pure Spring Water</div>
+            <div class="ingredient-row"><span>⏳</span> Time & Devotion</div>
+            <div class="ingredient-divider"></div>
+            <span class="card-badge">4.0% ABV</span>
           </div>
           <p class="card-description">
-            Over four centuries of brewing excellence. Using only the finest
-            ingredients and time-honored methods to craft the perfect pilsner
-            that has delighted generations.
+            Over four centuries of brewing excellence using time-honored
+            methods to craft the perfect pilsner.
           </p>
         </article>
 
         <article class="heritage-card">
           <span class="card-ornament">🇳🇱</span>
           <h3 class="card-title">Dutch Craftsmanship</h3>
-          <div class="card-art">
-    ╔═══════════════════════╗
-    ║     AUTHENTICALLY     ║
-    ║        DUTCH          ║
-    ╚═══════════════════════╝
-
-       ★  ★  ★  ★  ★
-
-        PREMIUM LAGER
-
-      ✓ Natural Ingredients
-      ✓ No Artificial Additives
-      ✓ Traditional Methods
-      ✓ Award-Winning Quality
-
-          GROLSCH
+          <div class="card-ingredients">
+            <div class="ingredient-row"><span>✓</span> Natural Ingredients</div>
+            <div class="ingredient-row"><span>✓</span> No Artificial Additives</div>
+            <div class="ingredient-row"><span>✓</span> Traditional Methods</div>
+            <div class="ingredient-row"><span>✓</span> Award-Winning Quality</div>
+            <div class="ingredient-divider"></div>
+            <span class="card-badge">★★★★★</span>
           </div>
           <p class="card-description">
             Brewed in the heart of the Netherlands with an unwavering
-            commitment to quality. Every bottle embodies centuries
-            of Dutch brewing tradition and expertise.
+            commitment to quality and tradition.
           </p>
         </article>
       </div>
@@ -1342,4 +1434,4 @@
   </div>
 </main>
 
-<router-outlet />
+<router-outlet/>
