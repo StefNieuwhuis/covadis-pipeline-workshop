@@ -1,21 +1,28 @@
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Bebas+Neue&display=swap');
+
   :host {
-    /* Grolsch Brand Colors */
-    --grolsch-green-primary: #1e5631;
-    --grolsch-green-dark: #163d22;
-    --grolsch-gold: #c9a961;
-    --grolsch-cream: #f9f6f0;
-    --grolsch-white: #ffffff;
+    /* Grolsch Brand Colors - Refined */
+    --grolsch-green-deep: #0d2818;
+    --grolsch-green: #1a472a;
+    --grolsch-green-light: #2d6a4f;
+    --grolsch-green-muted: #3d8b5f;
+    --grolsch-gold: #c9a227;
+    --grolsch-gold-light: #d4af37;
+    --grolsch-gold-bright: #f4d03f;
+    --grolsch-cream: #faf8f5;
+    --grolsch-copper: #b87333;
 
     /* UI Colors */
-    --bg-primary: #0d1117;
-    --bg-secondary: #161b22;
-    --text-primary: #e6edf3;
-    --text-secondary: #8b949e;
-    --border-color: rgba(201, 169, 97, 0.15);
+    --bg-dark: #050a07;
+    --bg-card: rgba(26, 71, 42, 0.08);
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.75);
+    --text-muted: rgba(255, 255, 255, 0.5);
+    --text-gold: #d4af37;
 
     /* Typography */
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -26,367 +33,1313 @@
     box-sizing: border-box;
   }
 
+  /* ═══════════════════════════════════════════════════════════════════════════
+     ANIMATIONS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes goldShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+  }
+
+  @keyframes gentlePulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.8; transform: scale(1.02); }
+  }
+
+  @keyframes floatUp {
+    0% {
+      transform: translateY(100vh) scale(0.4) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.3;
+    }
+    100% {
+      transform: translateY(-20vh) scale(1) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  @keyframes rotateGlow {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  @keyframes hopFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-15px) rotate(5deg); }
+    75% { transform: translateY(10px) rotate(-5deg); }
+  }
+
+  @keyframes borderGlow {
+    0%, 100% {
+      box-shadow: 0 0 30px rgba(201, 162, 39, 0.1),
+                  inset 0 0 30px rgba(201, 162, 39, 0.02);
+    }
+    50% {
+      box-shadow: 0 0 50px rgba(201, 162, 39, 0.2),
+                  inset 0 0 50px rgba(201, 162, 39, 0.05);
+    }
+  }
+
+  @keyframes scrollLine {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+  }
+
+  @keyframes grainAnimation {
+    0%, 100% { transform: translate(0, 0); }
+    10% { transform: translate(-2%, -2%); }
+    20% { transform: translate(2%, 2%); }
+    30% { transform: translate(-1%, 1%); }
+    40% { transform: translate(1%, -1%); }
+    50% { transform: translate(-2%, 2%); }
+    60% { transform: translate(2%, -2%); }
+    70% { transform: translate(-1%, -1%); }
+    80% { transform: translate(1%, 1%); }
+    90% { transform: translate(-2%, -1%); }
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     MAIN LAYOUT
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   main {
     min-height: 100vh;
-    background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 100%);
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(26, 71, 42, 0.3) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 80% 50%, rgba(201, 162, 39, 0.05) 0%, transparent 50%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(26, 71, 42, 0.2) 0%, transparent 50%),
+      linear-gradient(180deg,
+        #050a07 0%,
+        #0a1510 20%,
+        #0d1a14 40%,
+        #0a1510 70%,
+        #050a07 100%
+      );
     color: var(--text-primary);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* Film Grain Overlay */
+  main::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    opacity: 0.03;
+    pointer-events: none;
+    z-index: 1000;
+    animation: grainAnimation 8s steps(10) infinite;
+  }
+
+  /* Decorative Border Frame */
+  main::after {
+    content: '';
+    position: fixed;
+    inset: 12px;
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    pointer-events: none;
+    z-index: 100;
+    border-radius: 4px;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     FLOATING ELEMENTS BACKGROUND
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .floating-elements {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0;
+  }
+
+  .hop-leaf {
+    position: absolute;
+    bottom: -100px;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: floatUp linear infinite;
+    filter: blur(1px);
+  }
+
+  .hop-leaf:nth-child(1) { left: 5%; animation-duration: 25s; animation-delay: 0s; font-size: 1.2rem; }
+  .hop-leaf:nth-child(2) { left: 15%; animation-duration: 30s; animation-delay: 3s; font-size: 1.8rem; }
+  .hop-leaf:nth-child(3) { left: 25%; animation-duration: 28s; animation-delay: 7s; font-size: 1rem; }
+  .hop-leaf:nth-child(4) { left: 35%; animation-duration: 32s; animation-delay: 2s; font-size: 1.4rem; }
+  .hop-leaf:nth-child(5) { left: 45%; animation-duration: 26s; animation-delay: 5s; font-size: 1.6rem; }
+  .hop-leaf:nth-child(6) { left: 55%; animation-duration: 29s; animation-delay: 1s; font-size: 1.1rem; }
+  .hop-leaf:nth-child(7) { left: 65%; animation-duration: 31s; animation-delay: 6s; font-size: 1.5rem; }
+  .hop-leaf:nth-child(8) { left: 75%; animation-duration: 27s; animation-delay: 4s; font-size: 1.3rem; }
+  .hop-leaf:nth-child(9) { left: 85%; animation-duration: 33s; animation-delay: 8s; font-size: 1.7rem; }
+  .hop-leaf:nth-child(10) { left: 92%; animation-duration: 24s; animation-delay: 2.5s; font-size: 1rem; }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     CONTENT WRAPPER
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     HERO SECTION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .hero {
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 80px 24px;
+    position: relative;
   }
 
-  /* Hero Section */
-  .hero {
-    text-align: center;
-    margin-bottom: 80px;
-    max-width: 800px;
+  /* Radial glow behind logo */
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 900px;
+    background:
+      radial-gradient(circle, rgba(201, 162, 39, 0.08) 0%, transparent 40%),
+      radial-gradient(circle, rgba(26, 71, 42, 0.15) 0%, transparent 60%);
+    pointer-events: none;
+    animation: gentlePulse 8s ease-in-out infinite;
+  }
+
+  /* Decorative rotating ring */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 650px;
+    height: 650px;
+    border: 1px solid rgba(201, 162, 39, 0.1);
+    border-radius: 50%;
+    animation: rotateGlow 60s linear infinite;
+    background:
+      conic-gradient(from 0deg,
+        transparent 0deg,
+        rgba(201, 162, 39, 0.1) 10deg,
+        transparent 20deg,
+        transparent 180deg,
+        rgba(201, 162, 39, 0.1) 190deg,
+        transparent 200deg
+      );
+    pointer-events: none;
+  }
+
+  .logo-container {
+    animation: fadeInScale 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  /* Decorative corners */
+  .logo-container::before,
+  .logo-container::after {
+    content: '◆';
+    position: absolute;
+    font-size: 0.75rem;
+    color: var(--grolsch-gold);
+    opacity: 0.6;
+  }
+
+  .logo-container::before {
+    top: -40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .logo-container::after {
+    bottom: -40px;
+    left: 50%;
+    transform: translateX(-50%);
   }
 
   .brand-logo {
-    font-size: 4rem;
-    font-weight: 700;
-    color: var(--grolsch-gold);
-    letter-spacing: 8px;
-    margin-bottom: 16px;
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    font-size: clamp(4rem, 15vw, 10rem);
+    font-weight: 400;
+    letter-spacing: 0.3em;
     text-transform: uppercase;
-    line-height: 1.2;
+    background: linear-gradient(
+      135deg,
+      var(--grolsch-gold) 0%,
+      var(--grolsch-gold-bright) 25%,
+      var(--grolsch-gold) 50%,
+      var(--grolsch-gold-light) 75%,
+      var(--grolsch-gold) 100%
+    );
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: goldShimmer 6s linear infinite;
+    margin-bottom: 16px;
+    text-shadow: 0 0 80px rgba(201, 162, 39, 0.3);
+    position: relative;
   }
 
   .tagline {
-    font-size: 1.25rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(1.1rem, 3vw, 1.6rem);
     color: var(--text-secondary);
     font-weight: 300;
-    letter-spacing: 1px;
-    margin-bottom: 12px;
+    font-style: italic;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    margin-bottom: 48px;
+    animation: fadeInUp 1s ease-out 0.3s both;
   }
 
   .established {
-    font-size: 0.875rem;
-    color: var(--grolsch-green-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.95rem;
+    color: var(--grolsch-gold);
     font-weight: 500;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    animation: fadeInUp 1s ease-out 0.5s both;
+    padding: 20px 48px;
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    background:
+      linear-gradient(135deg, rgba(26, 71, 42, 0.15) 0%, rgba(5, 10, 7, 0.4) 100%);
+    backdrop-filter: blur(20px);
+    position: relative;
   }
 
-  /* Content Grid */
-  .content-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 48px;
-    max-width: 1200px;
+  .established::before,
+  .established::after {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--grolsch-gold), transparent);
+  }
+
+  .established::before {
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .established::after {
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .established-divider {
+    width: 6px;
+    height: 6px;
+    background: var(--grolsch-gold);
+    transform: rotate(45deg);
+    opacity: 0.8;
+  }
+
+  .scroll-indicator {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    animation: fadeIn 1s ease-out 1.5s both;
+  }
+
+  .scroll-indicator span {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--grolsch-gold), transparent);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    margin-bottom: 80px;
+    height: 20px;
+    background: var(--grolsch-gold-bright);
+    animation: scrollLine 1.5s ease-in-out infinite;
   }
 
-  .card {
-    background: linear-gradient(135deg, rgba(30, 86, 49, 0.06) 0%, rgba(201, 169, 97, 0.04) 100%);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 48px 32px;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  /* ═══════════════════════════════════════════════════════════════════════════
+     HERITAGE CARDS SECTION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .heritage-section {
+    padding: 120px 24px;
+    max-width: 1400px;
+    margin: 0 auto;
   }
 
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
-    border-color: rgba(201, 169, 97, 0.3);
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 48px;
+  }
+
+  @media (max-width: 900px) {
+    .heritage-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+  }
+
+  .heritage-card {
+    background:
+      linear-gradient(145deg, rgba(26, 71, 42, 0.12) 0%, rgba(5, 10, 7, 0.6) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    padding: 60px 48px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInUp 0.8s ease-out backwards;
+  }
+
+  .heritage-card:nth-child(1) { animation-delay: 0.1s; }
+  .heritage-card:nth-child(2) { animation-delay: 0.2s; }
+
+  .heritage-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--grolsch-gold), transparent);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .heritage-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--grolsch-gold), transparent);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .heritage-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(201, 162, 39, 0.35);
+    animation: borderGlow 3s ease-in-out infinite;
+  }
+
+  .heritage-card:hover::before,
+  .heritage-card:hover::after {
+    opacity: 1;
+  }
+
+  .card-ornament {
+    font-size: 3.5rem;
+    margin-bottom: 32px;
+    display: block;
+    filter: grayscale(20%);
+    animation: hopFloat 6s ease-in-out infinite;
+  }
+
+  .heritage-card:nth-child(2) .card-ornament {
+    animation-delay: -3s;
   }
 
   .card-title {
-    font-size: 1.5rem;
-    color: var(--grolsch-gold);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 2rem;
     font-weight: 600;
+    color: var(--text-primary);
     margin-bottom: 24px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    position: relative;
+    display: inline-block;
   }
 
-  .bottle-art {
-    background: rgba(0, 0, 0, 0.2);
-    border: 1px solid rgba(201, 169, 97, 0.1);
-    border-radius: 12px;
-    padding: 32px 24px;
-    margin: 24px 0;
-    font-family: "Courier New", "Courier", monospace;
-    font-size: 0.85rem;
-    line-height: 1.4;
-    color: var(--grolsch-green-primary);
-    overflow-x: auto;
+  .card-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 60px;
+    height: 2px;
+    background: var(--grolsch-gold);
+  }
+
+  .card-art {
+    font-family: 'Courier New', monospace;
+    font-size: 0.75rem;
+    line-height: 1.6;
+    color: var(--grolsch-gold);
+    opacity: 0.7;
     white-space: pre;
+    margin: 32px 0;
+    padding: 24px;
+    background: rgba(5, 10, 7, 0.5);
+    border-left: 2px solid rgba(201, 162, 39, 0.3);
   }
 
   .card-description {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.15rem;
     color: var(--text-secondary);
-    font-size: 1rem;
-    line-height: 1.7;
-    font-weight: 300;
+    line-height: 1.9;
+    font-weight: 400;
   }
 
-  /* Features Section */
-  .features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 32px;
-    max-width: 1200px;
-    width: 100%;
-    margin-bottom: 80px;
-  }
+  /* ═══════════════════════════════════════════════════════════════════════════
+     SECTION HEADERS
+     ═══════════════════════════════════════════════════════════════════════════ */
 
-  .feature {
+  .section-header {
     text-align: center;
-    padding: 24px;
+    margin-bottom: 80px;
+    position: relative;
+    animation: fadeInUp 0.6s ease-out;
+  }
+
+  .section-label {
+    display: inline-block;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.8rem;
+    color: var(--grolsch-gold);
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-bottom: 24px;
+    position: relative;
+    padding: 0 40px;
+  }
+
+  .section-label::before,
+  .section-label::after {
+    content: '—';
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(201, 162, 39, 0.4);
+  }
+
+  .section-label::before { left: 0; }
+  .section-label::after { right: 0; }
+
+  .section-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    letter-spacing: 0.02em;
+  }
+
+  .section-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.9;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     FEATURES SECTION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .features-section {
+    padding: 120px 24px 160px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  @media (max-width: 1100px) {
+    .features-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .features-grid {
+      grid-template-columns: 1fr;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: 48px 32px;
+    background:
+      linear-gradient(180deg, rgba(26, 71, 42, 0.08) 0%, transparent 100%);
+    border: 1px solid rgba(201, 162, 39, 0.1);
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    animation: fadeInUp 0.6s ease-out backwards;
+  }
+
+  .feature-card:nth-child(1) { animation-delay: 0.1s; }
+  .feature-card:nth-child(2) { animation-delay: 0.2s; }
+  .feature-card:nth-child(3) { animation-delay: 0.3s; }
+  .feature-card:nth-child(4) { animation-delay: 0.4s; }
+
+  .feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 1px;
+    background: var(--grolsch-gold);
+    transition: width 0.5s ease;
+  }
+
+  .feature-card:hover {
+    transform: translateY(-12px);
+    border-color: rgba(201, 162, 39, 0.3);
+    background:
+      linear-gradient(180deg, rgba(26, 71, 42, 0.15) 0%, rgba(201, 162, 39, 0.02) 100%);
+  }
+
+  .feature-card:hover::before {
+    width: 100%;
   }
 
   .feature-icon {
-    font-size: 2.5rem;
-    margin-bottom: 16px;
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 28px;
+    background:
+      linear-gradient(135deg, var(--grolsch-green) 0%, var(--grolsch-green-deep) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+  }
+
+  .feature-icon::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border: 1px solid rgba(201, 162, 39, 0.1);
+    transition: all 0.5s ease;
+  }
+
+  .feature-card:hover .feature-icon {
+    transform: scale(1.1) rotate(-5deg);
+    border-color: rgba(201, 162, 39, 0.4);
+    box-shadow: 0 0 40px rgba(201, 162, 39, 0.2);
+  }
+
+  .feature-card:hover .feature-icon::before {
+    inset: -12px;
+    border-color: rgba(201, 162, 39, 0.2);
   }
 
   .feature-title {
-    font-size: 1.125rem;
-    color: var(--text-primary);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.3rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
   }
 
   .feature-text {
-    font-size: 0.9375rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
     color: var(--text-secondary);
-    line-height: 1.6;
+    line-height: 1.7;
+    font-size: 1.05rem;
   }
 
-  /* Footer */
-  footer {
-    text-align: center;
-    padding-top: 48px;
-    border-top: 1px solid var(--border-color);
-    width: 100%;
+  /* ═══════════════════════════════════════════════════════════════════════════
+     STATS SECTION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .stats-section {
+    padding: 100px 24px;
     max-width: 1200px;
+    margin: 0 auto;
   }
 
-  .footer-content {
-    color: var(--text-secondary);
-    font-size: 0.875rem;
-    letter-spacing: 1px;
-    line-height: 1.8;
+  .stats-container {
+    background:
+      linear-gradient(135deg, rgba(26, 71, 42, 0.1) 0%, rgba(5, 10, 7, 0.5) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.15);
+    padding: 80px 60px;
+    position: relative;
+    overflow: hidden;
   }
 
-  .footer-badge {
-    display: inline-block;
-    margin-top: 16px;
-    padding: 8px 16px;
-    background: rgba(30, 86, 49, 0.1);
-    border: 1px solid var(--border-color);
-    border-radius: 24px;
-    font-size: 0.75rem;
+  .stats-container::before,
+  .stats-container::after {
+    content: '❧';
+    position: absolute;
+    font-size: 2rem;
     color: var(--grolsch-gold);
+    opacity: 0.15;
+  }
+
+  .stats-container::before {
+    top: 30px;
+    left: 40px;
+  }
+
+  .stats-container::after {
+    bottom: 30px;
+    right: 40px;
+    transform: rotate(180deg);
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 48px;
+    text-align: center;
+    position: relative;
+  }
+
+  @media (max-width: 900px) {
+    .stats-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 48px;
+    }
+
+    .stats-container {
+      padding: 60px 40px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .stats-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+  }
+
+  .stat-item {
+    padding: 20px;
+    position: relative;
+    animation: fadeInUp 0.5s ease-out backwards;
+  }
+
+  .stat-item:nth-child(1) { animation-delay: 0.1s; }
+  .stat-item:nth-child(2) { animation-delay: 0.2s; }
+  .stat-item:nth-child(3) { animation-delay: 0.3s; }
+  .stat-item:nth-child(4) { animation-delay: 0.4s; }
+
+  .stat-item::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 50%;
+    background: linear-gradient(to bottom, transparent, rgba(201, 162, 39, 0.3), transparent);
+  }
+
+  .stat-item:last-child::after,
+  .stat-item:nth-child(4)::after {
+    display: none;
+  }
+
+  @media (max-width: 900px) {
+    .stat-item:nth-child(2)::after {
+      display: none;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .stat-item::after {
+      display: none;
+    }
+  }
+
+  .stat-number {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3.5rem, 8vw, 5rem);
+    font-weight: 600;
+    background: linear-gradient(135deg, var(--grolsch-gold) 0%, var(--grolsch-gold-bright) 50%, var(--grolsch-gold) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 16px;
+    transition: all 0.4s ease;
+  }
+
+  .stat-item:hover .stat-number {
+    animation: goldShimmer 2s linear infinite;
+    transform: scale(1.05);
+  }
+
+  .stat-label {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
     text-transform: uppercase;
-    letter-spacing: 1.5px;
+    letter-spacing: 0.25em;
     font-weight: 500;
   }
 
-  /* Responsive Design */
+  /* ═══════════════════════════════════════════════════════════════════════════
+     CTA SECTION
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  .cta-section {
+    text-align: center;
+    padding: 160px 24px;
+    position: relative;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 800px;
+    background:
+      radial-gradient(circle, rgba(201, 162, 39, 0.06) 0%, transparent 50%),
+      radial-gradient(circle, rgba(26, 71, 42, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .cta-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    font-weight: 600;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.02em;
+  }
+
+  .cta-subtitle {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 56px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.9;
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px 64px;
+    background:
+      linear-gradient(135deg, var(--grolsch-gold) 0%, var(--grolsch-gold-light) 100%);
+    color: var(--bg-dark);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow:
+      0 8px 40px rgba(201, 162, 39, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+  }
+
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: left 0.7s ease;
+  }
+
+  .cta-button:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow:
+      0 16px 60px rgba(201, 162, 39, 0.4),
+      0 0 40px rgba(201, 162, 39, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+
+  .cta-button:hover::before {
+    left: 100%;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     FOOTER
+     ═══════════════════════════════════════════════════════════════════════════ */
+
+  footer {
+    padding: 120px 24px 80px;
+    text-align: center;
+    position: relative;
+    background:
+      linear-gradient(to top, rgba(5, 10, 7, 0.9) 0%, transparent 100%);
+  }
+
+  footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--grolsch-gold), transparent);
+  }
+
+  .footer-logo {
+    font-family: 'Bebas Neue', 'Arial Black', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 400;
+    background: linear-gradient(135deg, var(--grolsch-gold) 0%, var(--grolsch-gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.3em;
+    margin-bottom: 48px;
+  }
+
+  .footer-info {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    margin-bottom: 32px;
+  }
+
+  .footer-info p {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
+  }
+
+  .footer-link {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    transition: all 0.3s ease;
+    position: relative;
+    padding-bottom: 4px;
+  }
+
+  .footer-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 1px;
+    background: var(--grolsch-gold);
+    transition: width 0.3s ease;
+  }
+
+  .footer-link:hover {
+    color: var(--grolsch-gold);
+  }
+
+  .footer-link:hover::after {
+    width: 100%;
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .age-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 32px;
+    background:
+      linear-gradient(135deg, rgba(201, 162, 39, 0.08) 0%, rgba(26, 71, 42, 0.08) 100%);
+    border: 1px solid rgba(201, 162, 39, 0.2);
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.85rem;
+    color: var(--grolsch-gold);
+    letter-spacing: 0.15em;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .age-badge:hover {
+    border-color: rgba(201, 162, 39, 0.4);
+    box-shadow: 0 0 30px rgba(201, 162, 39, 0.1);
+  }
+
+  .copyright {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+  }
+
+  /* ═══════════════════════════════════════════════════════════════════════════
+     RESPONSIVE ADJUSTMENTS
+     ═══════════════════════════════════════════════════════════════════════════ */
+
   @media (max-width: 768px) {
-    main {
-      padding: 48px 16px;
+    .heritage-section,
+    .features-section,
+    .stats-section {
+      padding: 80px 20px;
     }
 
-    .brand-logo {
-      font-size: 2.5rem;
-      letter-spacing: 4px;
+    .heritage-card {
+      padding: 48px 32px;
     }
 
-    .tagline {
-      font-size: 1rem;
+    .cta-section {
+      padding: 100px 20px;
     }
 
-    .content-grid {
-      gap: 32px;
-      margin-bottom: 48px;
-    }
-
-    .card {
-      padding: 32px 24px;
-    }
-
-    .bottle-art {
-      font-size: 0.75rem;
-      padding: 24px 16px;
-    }
-
-    .features {
+    .footer-links {
       gap: 24px;
-      margin-bottom: 48px;
+    }
+
+    .established {
+      flex-wrap: wrap;
+      gap: 16px;
+      padding: 16px 32px;
     }
   }
 
   @media (max-width: 480px) {
     .brand-logo {
-      font-size: 2rem;
-      letter-spacing: 2px;
+      letter-spacing: 0.15em;
     }
 
-    .card-title {
-      font-size: 1.25rem;
+    .established-divider {
+      display: none;
     }
 
-    .bottle-art {
-      font-size: 0.7rem;
+    .cta-button {
+      padding: 20px 40px;
+      font-size: 1rem;
     }
   }
 </style>
 
 <main>
-  <!-- Hero Section -->
-  <div class="hero">
-    <h1 class="brand-logo">Grolsch Premium Lager</h1>
-    <p class="tagline">Premium Dutch Lager Beer</p>
-    <p class="established">Est. 1615 • Enschede, Netherlands</p>
+  <!-- Floating Hop Leaves Background -->
+  <div class="floating-elements">
+    <span class="hop-leaf">🍃</span>
+    <span class="hop-leaf">🌾</span>
+    <span class="hop-leaf">🍃</span>
+    <span class="hop-leaf">🌿</span>
+    <span class="hop-leaf">🍃</span>
+    <span class="hop-leaf">🌾</span>
+    <span class="hop-leaf">🍃</span>
+    <span class="hop-leaf">🌿</span>
+    <span class="hop-leaf">🍃</span>
+    <span class="hop-leaf">🌾</span>
   </div>
 
-  <!-- Main Content -->
-  <div class="content-grid">
-    <div class="card">
-      <h2 class="card-title">Iconic Swing-Top</h2>
-      <div class="bottle-art">
-    ╔══════════════╗
-    ║   GROLSCH    ║
-    ║   ────────   ║
-    ║   PREMIUM    ║
-    ║    LAGER     ║
-    ║              ║
-    ║ ┌──────────┐ ║
-    ║ │          │ ║
-    ║ │          │ ║
-    ║ │   Beer   │ ║
-    ║ │          │ ║
-    ║ │          │ ║
-    ║ │          │ ║
-    ║ └──────────┘ ║
-    ║              ║
-    ║  Enschede    ║
-    ║  Est. 1615   ║
-    ║              ║
-    ║    330 ml    ║
-    ║              ║
-    ║     ╔═╗      ║
-    ║     ║◉║      ║
-    ║     ╚═╝      ║
-    ╠══════════════╣
-    ║             ║
-    ║            ║
-    ║           ║
-    ║          ║
-    ║         ║
-    ║        ║
-    ║       ║
-    ╚══════════════╝
+  <div class="content">
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="logo-container">
+        <h1 class="brand-logo">Grolsch Premium Lager</h1>
+        <p class="tagline">Premium Dutch Lager</p>
+        <div class="established">
+          <span>Established 1615</span>
+          <span class="established-divider"></span>
+          <span>Enschede, Netherlands</span>
+        </div>
       </div>
-      <p class="card-description">
-        The legendary porcelain swing-top closure, introduced in 1897.
-        A symbol of quality and tradition that keeps our beer fresher for longer.
-      </p>
-    </div>
 
-    <div class="card">
-      <h2 class="card-title">Brewing Heritage</h2>
-      <div class="bottle-art">
-
-         🍺
-
-       ╔════════╗
-       ║ MASTER ║
-       ║ BREWED ║
-       ╚════════╝
-
-      Since 1615
-
-    Premium Barley
-         +
-     Noble Hops
-         +
-    Pure Water
-         +
-     Time & Care
-         =
-    Perfect Beer
-
-      4.0% ABV
+      <div class="scroll-indicator">
+        <span>Discover Our Story</span>
+        <div class="scroll-line"></div>
       </div>
-      <p class="card-description">
-        Over 400 years of brewing excellence. Using only the finest ingredients
-        and traditional methods to craft the perfect pilsner.
-      </p>
-    </div>
+    </section>
 
-    <div class="card">
-      <h2 class="card-title">Dutch Quality</h2>
-      <div class="bottle-art">
-
-        🇳🇱
-
-    ╔═══════════════╗
-    ║  AUTHENTIC    ║
-    ║     DUTCH     ║
-    ║  CRAFTSMANSHIP║
-    ╚═══════════════╝
-
-      ★ ★ ★ ★ ★
-
-     PREMIUM LAGER
-
-    ✓ Natural Hops
-    ✓ No Additives
-    ✓ Traditional
-    ✓ Award-Winning
-
-      GROLSCH
+    <!-- Heritage Section -->
+    <section class="heritage-section">
+      <div class="section-header">
+        <span class="section-label">Our Legacy</span>
+        <h2 class="section-title">Four Centuries of Excellence</h2>
+        <p class="section-subtitle">
+          Where tradition meets mastery, and every pour tells the story
+          of generations dedicated to the art of brewing.
+        </p>
       </div>
-      <p class="card-description">
-        Brewed in the Netherlands with unwavering commitment to quality.
-        Every bottle represents centuries of Dutch brewing tradition.
+
+      <div class="heritage-grid">
+        <article class="heritage-card">
+          <span class="card-ornament">🍺</span>
+          <h3 class="card-title">Brewing Heritage</h3>
+          <div class="card-art">
+     ╔════════════════════╗
+     ║    MASTER BREWED   ║
+     ║    SINCE  1615     ║
+     ╚════════════════════╝
+
+      Premium Barley
+           ✦
+       Noble Hops
+           ✦
+      Pure Spring Water
+           ✦
+       Time & Devotion
+           ═
+       Perfect Lager
+
+        ◆ 4.0% ABV ◆
+          </div>
+          <p class="card-description">
+            Over four centuries of brewing excellence. Using only the finest
+            ingredients and time-honored methods to craft the perfect pilsner
+            that has delighted generations.
+          </p>
+        </article>
+
+        <article class="heritage-card">
+          <span class="card-ornament">🇳🇱</span>
+          <h3 class="card-title">Dutch Craftsmanship</h3>
+          <div class="card-art">
+    ╔═══════════════════════╗
+    ║     AUTHENTICALLY     ║
+    ║        DUTCH          ║
+    ╚═══════════════════════╝
+
+       ★  ★  ★  ★  ★
+
+        PREMIUM LAGER
+
+      ✓ Natural Ingredients
+      ✓ No Artificial Additives
+      ✓ Traditional Methods
+      ✓ Award-Winning Quality
+
+          GROLSCH
+          </div>
+          <p class="card-description">
+            Brewed in the heart of the Netherlands with an unwavering
+            commitment to quality. Every bottle embodies centuries
+            of Dutch brewing tradition and expertise.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="section-header">
+        <span class="section-label">The Craft</span>
+        <h2 class="section-title">What Sets Us Apart</h2>
+        <p class="section-subtitle">
+          Every element of our brewing process reflects our dedication
+          to creating an exceptional lager experience.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <article class="feature-card">
+          <div class="feature-icon">🌾</div>
+          <h3 class="feature-title">Premium Ingredients</h3>
+          <p class="feature-text">Finest barley, noble hops, and pure Dutch spring water</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">⏳</div>
+          <h3 class="feature-title">Extended Brewing</h3>
+          <p class="feature-text">Longer brewing process for a fuller, richer flavor profile</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">🏆</div>
+          <h3 class="feature-title">Award-Winning</h3>
+          <p class="feature-text">Internationally recognized for brewing excellence</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon">♻️</div>
+          <h3 class="feature-title">Sustainable</h3>
+          <p class="feature-text">Committed to environmental responsibility and stewardship</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="stats-container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-number">1615</div>
+            <div class="stat-label">Year Founded</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">400+</div>
+            <div class="stat-label">Years of Brewing</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Countries Served</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number">∞</div>
+            <div class="stat-label">Dedication</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <h2 class="cta-title">Experience the Legacy</h2>
+      <p class="cta-subtitle">
+        Join millions who have discovered the exceptional taste that
+        comes from over four centuries of brewing mastery.
       </p>
-    </div>
+      <button class="cta-button">
+        <span>Explore Our Beers</span>
+        <span>→</span>
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-logo">GROLSCH</div>
+
+      <div class="footer-info">
+        <p>GROLSCH BREWERIES • ENSCHEDE, THE NETHERLANDS</p>
+        <p>Brewing Excellence Since 1615</p>
+      </div>
+
+      <nav class="footer-links">
+        <a href="#" class="footer-link">Our Story</a>
+        <a href="#" class="footer-link">Our Beers</a>
+        <a href="#" class="footer-link">Sustainability</a>
+        <a href="#" class="footer-link">Contact</a>
+      </nav>
+
+      <div class="footer-bottom">
+        <div class="age-badge">
+          <span>🍺</span>
+          <span>ENJOY RESPONSIBLY • 18+</span>
+        </div>
+        <p class="copyright">© 2024 Grolsch. All Rights Reserved.</p>
+      </div>
+    </footer>
   </div>
-
-  <!-- Features Section -->
-  <div class="features">
-    <div class="feature">
-      <div class="feature-icon">🌾</div>
-      <h3 class="feature-title">Premium Ingredients</h3>
-      <p class="feature-text">Finest barley, noble hops, and pure spring water</p>
-    </div>
-
-    <div class="feature">
-      <div class="feature-icon">⏱️</div>
-      <h3 class="feature-title">Extended Brewing</h3>
-      <p class="feature-text">Longer brewing process for fuller flavor</p>
-    </div>
-
-    <div class="feature">
-      <div class="feature-icon">🏆</div>
-      <h3 class="feature-title">Award-Winning</h3>
-      <p class="feature-text">Internationally recognized excellence</p>
-    </div>
-
-    <div class="feature">
-      <div class="feature-icon">♻️</div>
-      <h3 class="feature-title">Sustainable</h3>
-      <p class="feature-text">Committed to environmental responsibility</p>
-    </div>
-  </div>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <p>GROLSCH BREWERIES • ENSCHEDE, THE NETHERLANDS</p>
-      <p>Brewing Excellence Since 1615</p>
-      <div class="footer-badge">Enjoy Responsibly</div>
-    </div>
-  </footer>
 </main>
-
 
 <router-outlet />
