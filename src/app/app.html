@@ -194,8 +194,8 @@
   .logo-container::after { bottom: -40px; left: 50%; transform: translateX(-50%); }
 
   .brand-logo {
-    font-family: var(--font-logo);
-    font-size: clamp(4rem, 15vw, 10rem);
+    font-family: var(--font-logo),serif;
+    font-size: clamp(2rem, 10vw, 5rem);
     font-weight: 900;
     letter-spacing: 0.2em;
     text-transform: uppercase;
@@ -232,11 +232,25 @@
     letter-spacing: 0.25em;
     text-transform: uppercase;
     animation: fadeInUp 1s ease-out 0.5s both;
-    padding: 20px 48px;
+    padding: 32px 48px;
     border: 1px solid rgba(201, 162, 39, 0.25);
     background: linear-gradient(135deg, rgba(26, 71, 42, 0.15) 0%, rgba(5, 10, 7, 0.4) 100%);
     backdrop-filter: blur(20px);
     position: relative;
+  }
+
+  .established span:first-child,
+  .established span:last-child {
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .established span:first-child {
+    text-align: right;
+  }
+
+  .established span:last-child {
+    text-align: left;
   }
 
   .established::before, .established::after {
